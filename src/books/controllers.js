@@ -37,6 +37,19 @@ module.exports = {
     },
 
     // Update
+    updateBooks: async (req, res) => {
+        try {
+            const books = await Book.update(
+                req.body.update,
+                { where: req.body.where},
+            );
+
+            res.status(200).json({
+                message: 'Books updated.', 
+                books: books
+            });
+        } catch (error) {sendError(res, error)};
+    },
 
     // Delete
 }

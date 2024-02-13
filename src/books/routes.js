@@ -10,6 +10,7 @@ bookRouter.post("/books/addBook", ctrl.addBook);
 bookRouter.get("/books", ctrl.readBooks);
 
 // Update
+bookRouter.put("/books", ctrl.updateBooks);
 
 // Delete
 
