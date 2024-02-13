@@ -26,15 +26,13 @@ module.exports = {
 
     // Read
     readBooks: async (req, res) => {
-        try {            
+        try {
             const books = await Book.findAll();
 
-            res.status(200).json(
-                {
-                    message: 'List of books successfully retreived.', 
-                    books: books 
-                }
-            );
+            res.status(200).json({
+                message: 'Successfully retrieved list of books.', 
+                books: books
+            });
         } catch (error) {sendError(res, error)};
     },
 
