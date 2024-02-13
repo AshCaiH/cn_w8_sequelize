@@ -13,6 +13,7 @@ bookRouter.get("/books", ctrl.readBooks);
 bookRouter.put("/books", ctrl.updateBooks);
 
 // Delete
+bookRouter.delete("/books", ctrl.deleteBooks);
 
 
 module.exports = bookRouter;

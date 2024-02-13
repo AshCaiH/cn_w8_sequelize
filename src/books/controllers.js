@@ -52,4 +52,14 @@ module.exports = {
     },
 
     // Delete
+    deleteBooks: async (req, res) => {
+        try {
+            const books = await Book.destroy({ where: req.body.where});
+
+            res.status(200).json({
+                message: 'Books removed from database.', 
+                books: books
+            });
+        } catch (error) {sendError(res, error)};
+    },
 }
