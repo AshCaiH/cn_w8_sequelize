@@ -4,7 +4,7 @@ const bookRouter = Router();
 const ctrl = require("./controllers.js")
 
 // Create
-bookRouter.post("/books/addBook", ctrl.addBook);
+bookRouter.post("/books", ctrl.addBook);
 
 // Read
 bookRouter.get("/books", ctrl.readBooks);

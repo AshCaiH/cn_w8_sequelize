@@ -7,6 +7,10 @@ const sendError = (res, error) => {
     });
 }
 
+const sendSuccess = (res, message, extra) => {
+    res.status(200).json({message, ...extra});
+}
+
 module.exports = {
     // Create
     addBook: async (req, res) => {
@@ -17,10 +21,7 @@ module.exports = {
                 genre:  req.body.genre,
             });
 
-            res.status(200).json({
-                message: 'Successfully added book to database.', 
-                book:book 
-            });
+            sendSuccess(res, 'Successfully added book to database.', {books: book});
         } catch (error) {sendError(res, error)};
     },
 
@@ -29,10 +30,7 @@ module.exports = {
         try {
             const books = await Book.findAll();
 
-            res.status(200).json({
-                message: 'Successfully retrieved list of books.', 
-                books: books
-            });
+            sendSuccess(res, 'Successfully retrieved list of books.', {books: books});
         } catch (error) {sendError(res, error)};
     },
 
@@ -44,10 +42,7 @@ module.exports = {
                 { where: req.body.where},
             );
 
-            res.status(200).json({
-                message: 'Books updated.', 
-                books: books
-            });
+            sendSuccess(res, 'Books successfully updated.', {books: books});
         } catch (error) {sendError(res, error)};
     },
 
@@ -56,10 +51,7 @@ module.exports = {
         try {
             const books = await Book.destroy({ where: req.body.where});
 
-            res.status(200).json({
-                message: 'Books removed from database.', 
-                books: books
-            });
+            sendSuccess(res, 'Books successfully removed books from database.', {books: books});
         } catch (error) {sendError(res, error)};
     },
 }
