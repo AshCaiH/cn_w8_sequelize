@@ -7,7 +7,11 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/health", (req, res) => {
+    res.status(200).json({message:"API is healthy"});
+})
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
-    console.log(`Page accessible at https://localhost/${port}`)
+    console.log(`Page accessible at http://localhost/${port}`)
 });
