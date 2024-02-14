@@ -7,17 +7,20 @@ const Book = require("./model.js");
 const Genre = require("../genres/model.js");
 const Author = require("../authors/model.js");
 
+const Model = Book;
+const path = "/books"
+
 // Create
-bookRouter.post("/books", ctrl.addBook);
+bookRouter.post(path, (req,res) => Controllers.addItems(req,res,Model, ["title", "AuthorId", "GenreId"]));
 
 // Read
-bookRouter.get("/books", (req,res) => Controllers.read(req,res,Book, { include: Genre, Author }));
+bookRouter.get(path, (req,res) => Controllers.readItems(req,res,Model, { include: [Genre, Author] }));
 
 // Update
-bookRouter.put("/books", ctrl.updateBooks);
+bookRouter.put(path, (req,res) => Controllers.updateItems(req,res,Model));
 
 // Delete
-bookRouter.delete("/books", ctrl.deleteBooks);
+bookRouter.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
 
 
 module.exports = bookRouter;

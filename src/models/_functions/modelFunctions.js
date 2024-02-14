@@ -11,51 +11,53 @@ const sendSuccess = (res, message, extra) => {
 
 module.exports = {
     // Create
-    addBook: async (req, res) => {
+    addItems: async (req, res, Model, options) => {
         try {
-            const bookList = [];
+            const itemsToAdd = [];
 
-            for (item of req.body) {
-                bookList.push({
-                    title: item.title,
-                    AuthorId: item.AuthorId,
-                    GenreId: item.GenreId,
-                });
+            for (const item of req.body) {
+                itemsToAdd.push(
+                    Object.fromEntries(
+                        options.map((key) => {
+                            return [key, item[key]]
+                        })
+                    )
+                );
             }
 
-            const books = await Book.bulkCreate(bookList);
+            const items = await Model.bulkCreate(itemsToAdd);
 
-            sendSuccess(res, 'Successfully added books to database.', {books: books});
+            sendSuccess(res, 'Successfully added items to database.', {items: items});
         } catch (error) {sendError(res, error)};
     },
 
     // Read
-    read: async (req, res, Model, options) => {
+    readItems: async (req, res, Model, options) => {
         try {
             const items = await Model.findAll(options) //{ include: Genre, Author });
 
-            sendSuccess(res, 'Successfully retrieved list of books.', {items: items});
+            sendSuccess(res, 'Successfully retrieved list of items.', {items: items});
         } catch (error) {sendError(res, error)};
     },
 
     // Update
-    updateBooks: async (req, res) => {
+    updateItems: async (req, res, Model) => {
         try {
-            const books = await Book.update(
+            const items = await Model.update(
                 req.body.update,
                 { where: req.body.where},
             );
 
-            sendSuccess(res, 'Books successfully updated.', {books: books});
+            sendSuccess(res, 'Successfully updated items.', {items: items});
         } catch (error) {sendError(res, error)};
     },
 
     // Delete
-    deleteBooks: async (req, res) => {
+    deleteItems: async (req, res, Model) => {
         try {
-            const books = await Book.destroy({ where: req.body.where});
+            const items = await Model.destroy({ where: req.body.where});
 
-            sendSuccess(res, 'Successfully removed books from database.', {books: books});
+            sendSuccess(res, 'Successfully removed items from database.', {items: items});
         } catch (error) {sendError(res, error)};
     },
 }
