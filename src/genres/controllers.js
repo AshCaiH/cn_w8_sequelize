@@ -15,9 +15,15 @@ module.exports = {
     // Create
     addGenre: async (req, res) => {
         try {
-            const genres = await Genre.create({
-                name:  req.body.name,
-            });
+            const genreList = [];
+
+            for (item of req.body) {
+                genreList.push({
+                    name: item.name,
+                });
+            }
+
+            const genres = await Genre.bulkCreate(genreList);
 
             sendSuccess(res, 'Successfully added genre to database.', {genres: genres});
         } catch (error) {sendError(res, error)};
