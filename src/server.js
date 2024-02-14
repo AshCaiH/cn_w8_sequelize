@@ -3,8 +3,10 @@ const express = require("express");
 
 const Book = require("./books/model");
 const Genre = require("./genres/model");
+const Author = require("./authors/model");
 const bookRouter = require("./books/routes");
 const genreRouter = require("./genres/routes");
+const authorRouter = require("./authors/routes");
 
 
 const port = process.env.PORT || 5001;
@@ -14,10 +16,19 @@ const app = express();
 app.use(express.json());
 app.use(bookRouter);
 app.use(genreRouter);
+app.use(authorRouter);
 
 const syncTables = async () => {
-    await Book.sync();
-    await Genre.sync();
+    Genre.hasOne(Book);
+    Author.hasOne(Book);
+    
+    Genre.sync();
+    Author.sync();
+    Book.sync();
+    
+    Book.belongsTo(Genre);
+    Book.belongsTo(Author);
+
     console.log("Tables synced");
 }
 

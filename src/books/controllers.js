@@ -1,3 +1,5 @@
+const Genre = require("../genres/model");
+const Author = require("../authors/model");
 const Book = require("./model")
 
 const sendError = (res, error) => {
@@ -20,8 +22,8 @@ module.exports = {
             for (item of req.body) {
                 bookList.push({
                     title: item.title,
-                    author: item.author,
-                    genre: item.genre
+                    AuthorId: item.AuthorId,
+                    GenreId: item.GenreId,
                 });
             }
 
@@ -34,7 +36,7 @@ module.exports = {
     // Read
     readBooks: async (req, res) => {
         try {
-            const books = await Book.findAll();
+            const books = await Book.findAll({ include: Genre, Author });
 
             sendSuccess(res, 'Successfully retrieved list of books.', {books: books});
         } catch (error) {sendError(res, error)};
