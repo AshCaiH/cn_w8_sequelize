@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const Author = require("./model.js");
-const authorRouter = Router();
-const router = authorRouter;
+const router = Router();
 
 const Controllers = require("../_functions/controllers.js");
 
@@ -21,4 +20,4 @@ router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
 router.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
 
 
-module.exports = authorRouter;
+module.exports = router;

@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const Book = require("./model.js");
-const bookRouter = Router();
-const router = bookRouter;
+const router = Router();
 
 const Controllers = require("../_functions/controllers.js");
 
@@ -10,6 +9,7 @@ const Author = require("../authors/model.js");
 
 const Model = Book;
 const path = "/books"
+
 
 // Create
 router.post(path, (req,res) => Controllers.addItems(req,res,Model, ["title", "AuthorId", "GenreId"]));
@@ -24,4 +24,4 @@ router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
 router.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
 
 
-module.exports = bookRouter;
+module.exports = router;

@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const Genre = require("./model.js");
-const genreRouter = Router();
-const router = genreRouter;
+const router = Router();
 
 const Controllers = require("../_functions/controllers.js");
 
 const Model = Genre;
 const path = "/genres";
+
 
 // Create
 router.post(path, (req,res) => Controllers.addItems(req,res,Model, ["name"]));
@@ -21,4 +21,4 @@ router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
 router.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
 
 
-module.exports = genreRouter
+module.exports = router
