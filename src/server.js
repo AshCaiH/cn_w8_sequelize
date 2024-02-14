@@ -16,8 +16,12 @@ app.use(bookRouter);
 app.use(genreRouter);
 
 const syncTables = async () => {
-    await Book.sync();
-    await Genre.sync();
+    Book.sync();
+    Genre.sync();
+
+    Genre.hasOne(Book);
+    Book.belongsTo(Genre);
+
     console.log("Tables synced");
 }
 
