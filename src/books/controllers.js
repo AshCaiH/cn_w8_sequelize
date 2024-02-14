@@ -57,7 +57,7 @@ module.exports = {
         try {
             const books = await Book.destroy({ where: req.body.where});
 
-            sendSuccess(res, 'Books successfully removed books from database.', {books: books});
+            sendSuccess(res, 'Successfully removed books from database.', {books: books});
         } catch (error) {sendError(res, error)};
     },
 }
