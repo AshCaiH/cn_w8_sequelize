@@ -2,7 +2,6 @@ const { Router } = require("express");
 const bookRouter = Router();
 const router = bookRouter;
 
-const ctrl = require("./controllers.js");
 const Controllers = require("../_functions/controllers.js");
 const Book = require("./model.js");
 const Genre = require("../genres/model.js");

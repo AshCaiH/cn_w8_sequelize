@@ -5,8 +5,6 @@ const router = genreRouter;
 
 const Controllers = require("../_functions/controllers.js");
 
-const ctrl = require("./controllers.js");
-
 const Model = Genre;
 const path = "/genres";
 
