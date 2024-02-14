@@ -1,32 +1,29 @@
 require("dotenv").config();
+
 const express = require("express");
+const app = express();
 
 const Book = require("./models/books/model");
 const Genre = require("./models/genres/model");
 const Author = require("./models/authors/model");
+const models = [Book, Genre, Author];
+
 const bookRouter = require("./models/books/routes");
 const genreRouter = require("./models/genres/routes");
 const authorRouter = require("./models/authors/routes");
-
-
-
+const routers = [bookRouter, genreRouter, authorRouter];
 
 const port = process.env.PORT || 5001;
 
-const app = express();
 
 app.use(express.json());
-app.use(bookRouter);
-app.use(genreRouter);
-app.use(authorRouter);
+routers.map((router) => app.use(router));
 
 const syncTables = async () => {
     Genre.hasOne(Book);
     Author.hasOne(Book);
     
-    Genre.sync();
-    Author.sync();
-    Book.sync();
+    models.map((model) => app.use(model));
     
     Book.belongsTo(Genre);
     Book.belongsTo(Author);
