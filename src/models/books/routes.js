@@ -1,9 +1,10 @@
 const { Router } = require("express");
+const Book = require("./model.js");
 const bookRouter = Router();
 const router = bookRouter;
 
 const Controllers = require("../_functions/controllers.js");
-const Book = require("./model.js");
+
 const Genre = require("../genres/model.js");
 const Author = require("../authors/model.js");
 
