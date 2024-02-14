@@ -2,7 +2,9 @@ require("dotenv").config();
 const express = require("express");
 
 const Book = require("./books/model");
+const Genre = require("./genres/model");
 const bookRouter = require("./books/routes");
+const genreRouter = require("./genres/routes");
 
 
 const port = process.env.PORT || 5001;
@@ -11,9 +13,11 @@ const app = express();
 
 app.use(express.json());
 app.use(bookRouter);
+app.use(genreRouter);
 
 const syncTables = async () => {
     await Book.sync();
+    await Genre.sync();
     console.log("Tables synced");
 }
 
