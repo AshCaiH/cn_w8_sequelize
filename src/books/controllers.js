@@ -15,13 +15,19 @@ module.exports = {
     // Create
     addBook: async (req, res) => {
         try {
-            const book = await Book.create({
-                title:  req.body.title,
-                author: req.body.author,
-                genre:  req.body.genre,
-            });
+            const bookList = [];
 
-            sendSuccess(res, 'Successfully added book to database.', {books: book});
+            for (item of req.body) {
+                bookList.push({
+                    title: item.title,
+                    author: item.author,
+                    genre: item.genre
+                });
+            }
+
+            const books = await Book.bulkCreate(bookList);
+
+            sendSuccess(res, 'Successfully added books to database.', {books: books});
         } catch (error) {sendError(res, error)};
     },
 
