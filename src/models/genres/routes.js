@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const Genre = require("./model.js");
 const genreRouter = Router();
+const router = genreRouter;
 
-const Controllers = require("../_functions/modelFunctions.js");
+const Controllers = require("../_functions/controllers.js");
 
 const ctrl = require("./controllers.js");
 
@@ -10,16 +11,16 @@ const Model = Genre;
 const path = "/genres";
 
 // Create
-genreRouter.post(path, (req,res) => Controllers.addItems(req,res,Model, ["name"]));
+router.post(path, (req,res) => Controllers.addItems(req,res,Model, ["name"]));
 
 // Read
-genreRouter.get(path, (req,res) => Controllers.readItems(req,res,Model));
+router.get(path, (req,res) => Controllers.readItems(req,res,Model));
 
 // Update
-genreRouter.put(path, (req,res) => Controllers.updateItems(req,res,Model));
+router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
 
 // Delete
-genreRouter.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
+router.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
 
 
 module.exports = genreRouter
