@@ -30,9 +30,9 @@ module.exports = {
     },
 
     // Read
-    readGenres: async (req, res) => {
+    readGenres: async (req, res, Model) => {
         try {
-            const genres = await Genre.findAll();
+            const genres = await Model.findAll();
 
             sendSuccess(res, 'Successfully retrieved list of genres.', {genres: genres});
         } catch (error) {sendError(res, error)};
