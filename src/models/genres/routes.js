@@ -3,6 +3,8 @@ const Genre = require("./model.js");
 const router = Router();
 
 const Controllers = require("../_functions/controllers.js");
+const Book = require("../books/model.js");
+const Author = require("../authors/model.js");
 
 const Model = Genre;
 const path = "/genres";
@@ -12,7 +14,9 @@ const path = "/genres";
 router.post(path, (req,res) => Controllers.addItems(req,res,Model, ["name"]));
 
 // Read
-router.get(path, (req,res) => Controllers.readAllItems(req,res,Model));
+router.get(path, (req,res) => Controllers.readAllItems(req,res,Model, { include: [{ model: Book, attributes: ["title"]}]} ));
+
+router.get(path + "/:key/:value", (req,res) => Controllers.searchItems(req, res, Model, { include: [{ model: Book, attributes: ["title"]}]}));
 
 // Update
 router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
