@@ -5,6 +5,7 @@ const router = Router();
 const Controllers = require("../_functions/controllers.js");
 const Book = require("../books/model.js");
 const Genre = require("../genres/model.js");
+const { Sequelize } = require("sequelize");
 
 const Model = Author;
 const path = "/authors";
@@ -18,8 +19,8 @@ router.get(path, (req,res) => Controllers.readAllItems(req,res,Model, { include:
 
 router.get(path + "/:key/:value", (req,res) => Controllers.searchItems(req, res, Model, {
     include: [  { model: Book, attributes: ["title"], include: {
-                  model: Genre, attributes: ["name"]}}]
-}));
+                  model: Genre}}]
+}, {label: "genres", target:"Genre"}));
 
 // Update
 router.put(path, (req,res) => Controllers.updateItems(req,res,Model));

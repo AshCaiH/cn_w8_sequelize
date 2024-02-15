@@ -19,7 +19,7 @@ router.get(path, (req,res) => Controllers.readAllItems(req,res,Model, { include:
 router.get(path + "/:key/:value", (req,res) => Controllers.searchItems(req, res, Model, {
     include: [  { model: Book, attributes: ["title"], include: {
                   model: Author, attributes: ["name"]}}]
-}));
+}, {label: "authors", target:"Author"}));
 
 // Update
 router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
