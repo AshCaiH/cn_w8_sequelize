@@ -3,6 +3,7 @@ const Author = require("./model.js");
 const router = Router();
 
 const Controllers = require("../_functions/controllers.js");
+const Book = require("../books/model.js");
 
 const Model = Author;
 const path = "/authors";
