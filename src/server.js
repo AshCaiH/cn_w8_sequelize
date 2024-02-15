@@ -20,8 +20,8 @@ app.use(express.json());
 routers.map((router) => app.use(router));
 
 const syncTables = async () => {
-    Genre.hasOne(Book);
-    Author.hasOne(Book);
+    Genre.hasMany(Book);
+    Author.hasMany(Book);
     
     models.map((model) => app.use(model));
     

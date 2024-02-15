@@ -1,3 +1,6 @@
+const { Sequelize } = require("sequelize");
+const Book = require("../books/model");
+
 const sendError = (res, error) => {
     res.status(500).json({
         message: error.message,
@@ -32,11 +35,38 @@ module.exports = {
     },
 
     // Read
-    readItems: async (req, res, Model, options) => {
+    readAllItems: async (req, res, Model, options) => {
         try {
             const items = await Model.findAll(options) //{ include: Genre, Author });
 
             sendSuccess(res, 'Successfully retrieved list of items.', {items: items});
+        } catch (error) {sendError(res, error)};
+    },
+
+    searchItems: async (req, res, Model, options, distantRelations) => {
+        try {
+            const mergeOptions = {...options, where: {
+                [req.params["key"]]: req.params["value"]
+            }}
+
+            const items = await Model.findAll(mergeOptions)
+
+            // Handles things differently if the distantRelations parameter is filled in.
+            // If it is, makes a list of loosely paired values as set in the parameter
+            // eg authors who have written for the queried genre.
+            if (distantRelations && items.length > 0) {
+                let extra = [];
+
+                items[0].Books.map((book) => {
+                    extra.push(book[distantRelations.target].name);
+                });
+
+                extra = [...new Set(extra)];
+
+                sendSuccess(res, 'Search successful.', {items: items[0], [distantRelations.label]:extra});
+            } else {
+                sendSuccess(res, 'Search successful.', {items: items});
+            }
         } catch (error) {sendError(res, error)};
     },
 
