@@ -7,11 +7,12 @@ const Controllers = require("../_functions/controllers.js");
 const Model = Author;
 const path = "/authors";
 
+
 // Create
 router.post(path, (req,res) => Controllers.addItems(req,res,Model, ["name"]));
 
 // Read
-router.get(path, (req,res) => Controllers.readItems(req,res,Model));
+router.get(path, (req,res) => Controllers.readAllItems(req,res,Model));
 
 // Update
 router.put(path, (req,res) => Controllers.updateItems(req,res,Model));

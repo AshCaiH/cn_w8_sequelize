@@ -15,7 +15,9 @@ const path = "/books"
 router.post(path, (req,res) => Controllers.addItems(req,res,Model, ["title", "AuthorId", "GenreId"]));
 
 // Read
-router.get(path, (req,res) => Controllers.readItems(req,res,Model, { include: [Genre, Author] }));
+router.get(path, (req,res) => Controllers.readAllItems(req,res,Model, { include: [Genre, Author] }));
+
+router.get(path + "/:key/:value", (req,res) => Controllers.searchItems(req, res, Model, { include: [Genre, Author] }));
 
 // Update
 router.put(path, (req,res) => Controllers.updateItems(req,res,Model));

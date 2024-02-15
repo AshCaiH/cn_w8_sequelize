@@ -32,11 +32,23 @@ module.exports = {
     },
 
     // Read
-    readItems: async (req, res, Model, options) => {
+    readAllItems: async (req, res, Model, options) => {
         try {
             const items = await Model.findAll(options) //{ include: Genre, Author });
 
             sendSuccess(res, 'Successfully retrieved list of items.', {items: items});
+        } catch (error) {sendError(res, error)};
+    },
+
+    searchItems: async (req, res, Model, options) => {
+        try {
+            const mergeOptions = {...options, where: {
+                [req.params["key"]]: req.params["value"]
+            }}
+
+            const items = await Model.findAll(mergeOptions);
+
+            sendSuccess(res, 'Success.', {items: items});
         } catch (error) {sendError(res, error)};
     },
 
