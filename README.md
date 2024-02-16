@@ -58,12 +58,10 @@ Updates all items matching the criteria given in the request body.
 eg `PUT localhost:0000/books` with the following request body
 
 ``` json
-[
-    {
-        "update": { "GenreId": 1 },
-        "where": { "title": "The Lord of the Rings" }
-    }
-]
+{
+    "where": { "title": "The Lord of the Rings" },
+    "update": { "GenreId": 1 }
+}
 ```
 --- 
 ### DELETE
