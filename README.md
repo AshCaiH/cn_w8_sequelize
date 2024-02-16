@@ -45,10 +45,14 @@ eg `POST localhost:0000/books` with the following request body
 ### GET
 
 #### `GET localhost:0000/xxx`
-Lists all items of given type.
+Lists all items of the given type.
+
+eg `GET localhost:0000/authors`
 
 #### `GET localhost:0000/xxx/key/value`
 Lists any items with a property matching the key value pair.
+
+eg `GET localhost:0000/genres/fantasy`
 
 ---
 ### PUT
