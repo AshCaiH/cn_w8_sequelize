@@ -1,6 +1,3 @@
-const { Sequelize } = require("sequelize");
-const Book = require("../books/model");
-
 const sendError = (res, error) => {
     res.status(500).json({
         message: error.message,
@@ -12,7 +9,7 @@ const sendSuccess = (res, message, extra) => {
     res.status(200).json({message, ...extra});
 }
 
-module.exports = {
+module.exports = {    
     // Create
     addItems: async (req, res, Model, options) => {
         try {
@@ -33,6 +30,7 @@ module.exports = {
             sendSuccess(res, 'Successfully added items to database.', {items: items});
         } catch (error) {sendError(res, error)};
     },
+
 
     // Read
     readAllItems: async (req, res, Model, options) => {
@@ -70,6 +68,7 @@ module.exports = {
         } catch (error) {sendError(res, error)};
     },
 
+
     // Update
     updateItems: async (req, res, Model) => {
         try {
@@ -81,6 +80,7 @@ module.exports = {
             sendSuccess(res, 'Successfully updated items.', {items: items});
         } catch (error) {sendError(res, error)};
     },
+
 
     // Delete
     deleteItems: async (req, res, Model) => {
