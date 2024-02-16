@@ -49,6 +49,7 @@ Lists all items of given type.
 
 #### `localhost:0000/xxx/key/value`
 Lists any items with a property matching the key value pair.
+
 ---
 ### PUT
 #### `localhost:0000/xxx`
