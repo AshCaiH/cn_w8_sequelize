@@ -23,7 +23,7 @@ In each example url, replace "xxx" with "books", "authors" or "genres"
 
 ### POST
 
-#### `localhost:0000/xxx`
+#### `POST localhost:0000/xxx`
 Creates new items on the database. Must be entered as a list of objects.
 
 eg `POST localhost:0000/books` with the following request body
@@ -44,15 +44,15 @@ eg `POST localhost:0000/books` with the following request body
 ---
 ### GET
 
-#### `localhost:0000/xxx`
+#### `GET localhost:0000/xxx`
 Lists all items of given type.
 
-#### `localhost:0000/xxx/key/value`
+#### `GET localhost:0000/xxx/key/value`
 Lists any items with a property matching the key value pair.
 
 ---
 ### PUT
-#### `localhost:0000/xxx`
+#### `PUT localhost:0000/xxx`
 Updates all items matching the criteria given in the request body.
 
 eg `PUT localhost:0000/books` with the following request body
@@ -66,8 +66,8 @@ eg `PUT localhost:0000/books` with the following request body
 ]
 ```
 --- 
-### Delete
-#### `localhost:0000/xxx`
+### DELETE
+#### `DELETE localhost:0000/xxx`
 Delete items matching the criteria given in the request body.
 
 eg `DELETE localhost:0000/books` with the following request body
@@ -78,7 +78,7 @@ eg `DELETE localhost:0000/books` with the following request body
 
 This will delete any books written by the author with an ID of 4.
 
-#### `localhost:0000/xxx/deleteAll`
+#### `DELETE localhost:0000/xxx/deleteAll`
 Delete all items of the type given.
 
 eg `DELETE localhost:0000/genres/deleteAll` will delete all genres stored on the database.
