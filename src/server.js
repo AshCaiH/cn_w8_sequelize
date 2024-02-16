@@ -20,13 +20,16 @@ app.use(express.json());
 routers.map((router) => app.use(router));
 
 const syncTables = async () => {
+    models.map((model) => app.use(model));
+    
     Genre.hasMany(Book);
     Author.hasMany(Book);
     
-    models.map((model) => app.use(model));
     
     Book.belongsTo(Genre);
     Book.belongsTo(Author);
+
+    models.map((model) => model.sync());
 
     console.log("Tables synced");
 }
