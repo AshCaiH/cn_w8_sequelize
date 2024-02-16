@@ -31,8 +31,6 @@ const syncTables = async () => {
     Book.belongsTo(Author);    
 
     models.map((model) => model.sync());
-
-    successMessages();
 }
 
 app.get("/health", (req, res) => {
