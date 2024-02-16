@@ -90,4 +90,12 @@ module.exports = {
             sendSuccess(res, 'Successfully removed items from database.', {items: items});
         } catch (error) {sendError(res, error)};
     },
+
+    deleteAllItems: async (req, res, Model) => {
+        try {
+            const items = await Model.destroy({ where: {}});
+
+            sendSuccess(res, 'Successfully removed all items from database.', {items: items});
+        } catch (error) {sendError(res, error)};
+    }
 }

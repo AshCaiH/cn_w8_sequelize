@@ -1,9 +1,8 @@
 const { Router } = require("express");
-const Book = require("./model.js");
 const router = Router();
-
 const Controllers = require("../_functions/controllers.js");
 
+const Book = require("./model.js");
 const Genre = require("../genres/model.js");
 const Author = require("../authors/model.js");
 
@@ -24,6 +23,6 @@ router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
 
 // Delete
 router.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
-
+router.delete(path + "/deleteAll", (req,res) => Controllers.deleteAllItems(req,res,Model));
 
 module.exports = router;

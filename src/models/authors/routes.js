@@ -1,11 +1,10 @@
 const { Router } = require("express");
-const Author = require("./model.js");
+const Controllers = require("../_functions/controllers.js");
 const router = Router();
 
-const Controllers = require("../_functions/controllers.js");
+const Author = require("./model.js");
 const Book = require("../books/model.js");
 const Genre = require("../genres/model.js");
-const { Sequelize } = require("sequelize");
 
 const Model = Author;
 const path = "/authors";
@@ -27,6 +26,6 @@ router.put(path, (req,res) => Controllers.updateItems(req,res,Model));
 
 // Delete
 router.delete(path, (req,res) => Controllers.deleteItems(req,res,Model));
-
+router.delete(path + "/deleteAll", (req,res) => Controllers.deleteAllItems(req,res,Model));
 
 module.exports = router;
