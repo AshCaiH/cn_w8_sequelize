@@ -68,7 +68,7 @@ eg `PUT localhost:0000/books` with the following request body
 --- 
 ### DELETE
 #### `DELETE localhost:0000/xxx`
-Delete items matching the criteria given in the request body.
+Deletes items matching the criteria given in the request body.
 
 eg `DELETE localhost:0000/books` with the following request body
 
@@ -79,6 +79,6 @@ eg `DELETE localhost:0000/books` with the following request body
 This will delete any books written by the author with an ID of 4.
 
 #### `DELETE localhost:0000/xxx/deleteAll`
-Delete all items of the type given.
+Deletes all items of the type given.
 
 eg `DELETE localhost:0000/genres/deleteAll` will delete all genres stored on the database.
